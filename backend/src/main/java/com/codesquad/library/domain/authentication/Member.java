@@ -27,4 +27,11 @@ public class Member {
 
     @NotNull
     private String password;
+
+    @Column(name = "SLACK_ID")
+    private String slackId;
+
+    @Column(name = "REAL_NAME")
+    private String name;
+
 }

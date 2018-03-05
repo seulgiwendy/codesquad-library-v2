@@ -20,4 +20,6 @@ public @interface LongerThan {
 
     boolean value() default true;
 
+    int length() default 8;
+
 }

@@ -1,0 +1,8 @@
+spring:
+  profiles: local
+
+
+bean:
+  constraint:
+    password-length: 8
+
