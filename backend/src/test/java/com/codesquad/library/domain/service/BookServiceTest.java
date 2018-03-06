@@ -10,6 +10,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -48,10 +49,17 @@ public class BookServiceTest {
     }
 
     @Test
+    @Transactional
     public void RENT_BY_SERVICE_CLASS() {
         this.bookService.borrowBookbyBookid(this.member, 1L);
 
         assertThat(bookRepository.findByTitle("이말년씨리즈").get().getMember(), is(this.member));
+
+        this.bookService.returnBookbyBookId(this.member, 1L);
+        assertNull(bookRepository.findByTitle("이말년씨리즈").get().getMember());
+
+        assertThat(bookRepository.findByTitle("이말년씨리즈").get().isPossessed(), is(false));
     }
+
 
 }

@@ -32,7 +32,7 @@ public class Book extends BaseEntity {
     @Column(name = "BOOK_DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
-    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = Lists.newArrayList();
 
     @ManyToOne
@@ -57,11 +57,26 @@ public class Book extends BaseEntity {
     public void setPossessed(Member member) {
         this.isPossessed = true;
         this.lastRentDate = LocalDateTime.now();
+
+        if(this.member != null) {
+            this.member.getLendedBooks().remove(this);
+        }
+
         this.member = member;
         if(member.getLendedBooks() == null) {
             member.setLendedBooks(Lists.newArrayList());
         }
+
         member.getLendedBooks().add(this);
+    }
+
+    public void returnBook(Member member) {
+        if(member.equals(this.member)) {
+            this.member = null;
+            this.isPossessed = false;
+            this.elapsedDate = 0;
+            member.getLendedBooks().remove(this);
+        }
     }
 
     public void addReview(Review review) {

@@ -28,4 +28,12 @@ public class BookService {
         return book;
     }
 
+    public Book returnBookbyBookId(Member member, long bookId) {
+        Book book = bookRepository.findById(bookId).get();
+
+        //TODO throws an exception if lender - requested member does not match.
+        book.returnBook(member);
+        return book;
+    }
+
 }
