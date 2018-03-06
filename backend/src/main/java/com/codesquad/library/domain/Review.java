@@ -1,6 +1,7 @@
 package com.codesquad.library.domain;
 
 import com.codesquad.library.domain.authentication.Member;
+import com.google.common.base.Objects;
 import lombok.*;
 import org.springframework.lang.Nullable;
 
@@ -11,6 +12,7 @@ import javax.validation.constraints.Size;
 @Getter
 @Setter
 @ToString
+@Builder
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class Review {
@@ -33,4 +35,17 @@ public class Review {
     @Column(name = "REVIEW_CONTENT", columnDefinition = "TEXT NULL")
     private String content;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Review review = (Review) o;
+        return Objects.equal(book, review.book) &&
+                Objects.equal(content, review.content);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(book, content);
+    }
 }

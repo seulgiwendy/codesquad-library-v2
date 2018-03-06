@@ -19,6 +19,17 @@ import java.util.List;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class Member {
 
+    @Getter
+    public enum MemberRoles {
+        ADMIN("ADMIN"), USER("USER");
+
+        private String role;
+
+        MemberRoles(String role) {
+            this.role = role;
+        }
+    }
+
     @Id
     @GeneratedValue
     private long userId;
@@ -29,6 +40,10 @@ public class Member {
 
     @NotNull
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "USER_ROLE")
+    private MemberRoles roles;
 
     @Column(name = "SLACK_ID")
     private String slackId;

@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 
 import javax.validation.Validator;
@@ -35,6 +36,7 @@ public class BookTest {
 
     private Book book;
     private Member member;
+    private Review review;
 
     @Before
     public void setUp() {
@@ -49,21 +51,34 @@ public class BookTest {
                 .password("1234")
                 .build();
 
+        this.review = Review.builder()
+                .content("킹갓말년의 역작! 필독을 추천합니다.")
+                .build();
+
         this.member = memberRepository.save(member);
         this.book = this.bookRepository.save(book);
     }
 
-
     @Test
+    @Transactional
     public void RENT_TEST() {
         this.book.setPossessed(this.member);
 
         bookRepository.save(this.book);
-        memberRepository.save(this.member);
 
         assertThat(bookRepository.findByTitle("이말년씨리즈").get().getMember(), is(this.member));
         assertThat(bookRepository.findByTitle("이말년씨리즈").get().getLastRentDate().getDayOfMonth(), is(6));
+        assertThat(memberRepository.findByLoginEmail("lemon@codesquad.kr").get().getLendedBooks().get(0), is(this.book));
     }
 
+    @Test
+    @Transactional
+    public void REGISTER_REVIEW() {
+        Book book = bookRepository.findByTitle("이말년씨리즈").get();
 
+        book.addReview(this.review);
+        bookRepository.save(book);
+
+        assertThat(book.getReviews().get(0), is(this.review));
+    }
 }

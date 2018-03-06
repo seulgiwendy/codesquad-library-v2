@@ -2,12 +2,14 @@ package com.codesquad.library.domain;
 
 import com.codesquad.library.domain.authentication.Member;
 import com.codesquad.library.domain.constraints.LongerThan;
+import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,11 +32,14 @@ public class Book extends BaseEntity {
     @Column(name = "BOOK_DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+    private List<Review> reviews = Lists.newArrayList();
+
     @ManyToOne
     @JoinColumn(name = "AUTHOR_ID")
     private Author author;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "RENT_MEMBER_ID")
     private Member member;
 
@@ -57,5 +62,29 @@ public class Book extends BaseEntity {
             member.setLendedBooks(Lists.newArrayList());
         }
         member.getLendedBooks().add(this);
+    }
+
+    public void addReview(Review review) {
+        if (this.reviews == null) {
+            this.reviews = Lists.newArrayList();
+        }
+
+        this.reviews.add(review);
+        review.setBook(this);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equal(title, book.title) &&
+                Objects.equal(description, book.description) &&
+                Objects.equal(author, book.author);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(title, description, author);
     }
 }
