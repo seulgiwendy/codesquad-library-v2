@@ -39,7 +39,7 @@ public class Book extends BaseEntity {
     @JoinColumn(name = "AUTHOR_ID")
     private Author author;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "RENT_MEMBER_ID")
     private Member member;
 
