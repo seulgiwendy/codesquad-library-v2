@@ -1,8 +1,22 @@
 spring:
   profiles: local
+  h2:
+    console:
+      enabled: true
+  datasource:
+    url: jdbc:h2:file:/~test
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  output:
+    ansi:
+      enabled: always
 
 
 bean:
   constraint:
     password-length: 8
 
+
+spring:
+  h2:

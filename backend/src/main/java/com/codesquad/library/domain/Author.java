@@ -1,8 +1,6 @@
 package com.codesquad.library.domain;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,6 +10,9 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@Builder
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class Author {
 
     @Id

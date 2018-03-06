@@ -1,9 +1,7 @@
 package com.codesquad.library.domain;
 
 import com.codesquad.library.domain.constraints.LongerThan;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -12,6 +10,9 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @ToString
+@Builder
+@NoArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor(access = AccessLevel.PACKAGE)
 public class Book extends BaseEntity {
 
     @Id
@@ -29,6 +30,4 @@ public class Book extends BaseEntity {
     @ManyToOne
     @JoinColumn(name = "AUTHOR_ID")
     private Author author;
-
-
 }
