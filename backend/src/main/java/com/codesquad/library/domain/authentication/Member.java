@@ -51,7 +51,7 @@ public class Member {
     @Column(name = "REAL_NAME")
     private String name;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.MERGE, orphanRemoval = true)
+    @OneToMany(mappedBy = "member", cascade = CascadeType.MERGE, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<Book> lendedBooks = Lists.newArrayList();
 
     @Override

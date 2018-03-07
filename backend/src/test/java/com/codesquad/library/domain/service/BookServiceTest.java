@@ -49,7 +49,6 @@ public class BookServiceTest {
     }
 
     @Test
-    @Transactional
     public void RENT_BY_SERVICE_CLASS() {
         this.bookService.borrowBookbyBookid(this.member, 1L);
 
