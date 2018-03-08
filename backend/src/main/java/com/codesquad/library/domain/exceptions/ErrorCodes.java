@@ -11,7 +11,8 @@ public enum ErrorCodes {
 
     NOT_FOUND(10, "ITEM NOT FOUND"),
     NOT_MATCH(11, "ITEM REQUESTED DOES NOT MATCH"),
-    INTERNAL_ERROR(20, "INTERNAL ERROR OCCURRED");
+    INTERNAL_ERROR(20, "INTERNAL ERROR OCCURRED"),
+    SECURITY_ERROR(30, "SECURITY ERROR OCCURRED");
 
     public int code;
     public String message;
@@ -29,7 +30,7 @@ public enum ErrorCodes {
         return code == this.code;
     }
 
-    static class NoCodeFoundException extends RuntimeException {
+    static class NoCodeFoundException extends ApplicationException {
 
         public static final String STD_ERROR_MSG = "조건에 맞는 코드가 검색되지 않았습니다.";
 
