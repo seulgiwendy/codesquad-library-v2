@@ -16,7 +16,7 @@ public class ActiveUserDetailsService implements UserDetailsService {
     private MemberRepository memberRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String loginEmail) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String loginEmail) throws NoAccountPresentException {
         return new ActiveUser(memberRepository.findByLoginEmail(loginEmail).orElseThrow(() -> new NoAccountPresentException("ID가 존재하지 않습니다.")));
     }
 }

@@ -12,6 +12,16 @@ spring:
     ansi:
       enabled: always
 
+oauth:
+  resource:
+    id: codesquad-library
+  client:
+    id: codesquad-library
+  access_token:
+    validity: 3600
+    signingkey: test-signing-key
+
+
 
 bean:
   constraint:
