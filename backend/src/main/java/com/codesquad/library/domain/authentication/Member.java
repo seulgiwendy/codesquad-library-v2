@@ -11,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Entity
+@Table(name = "SERVICE_MEMBER")
 @Getter
 @Setter
 @ToString
@@ -38,7 +39,7 @@ public class Member {
     @NotNull
     private String loginEmail;
 
-    @NotNull
+    @Column(columnDefinition = "VARCHAR(60) NOT NULL")
     private String password;
 
     @Enumerated(EnumType.STRING)

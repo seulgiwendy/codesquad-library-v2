@@ -1,4 +1,4 @@
-package com.codesquad.library.security;
+package com.codesquad.library.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -25,11 +26,14 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Value("${oauth.client.id}")
     private String clientId;
 
-    @Value("${access_token.signingkey}")
+    @Value("${oauth.access_token.signingkey}")
     private String signingKey;
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Bean
     public TokenStore tokenStore() {
@@ -58,7 +62,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
         clientDetails
                 .inMemory()
                 .withClient(clientId)
-                .secret("test-secret")
+                .secret(passwordEncoder.encode("test-secret"))
                 .authorizedGrantTypes("password")
                 .scopes("read", "write")
                 .resourceIds("test-resource-id");
@@ -76,9 +80,4 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .tokenEnhancer(enhancerChain)
                 .authenticationManager(authenticationManager);
     }
-
-
-
-
-
 }
