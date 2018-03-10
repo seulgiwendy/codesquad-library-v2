@@ -1,9 +1,11 @@
 package com.codesquad.library.domain.authentication;
 
+import lombok.Getter;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.User;
 import java.util.Arrays;
 
+@Getter
 public class ActiveUser extends User {
 
     private final Member member;

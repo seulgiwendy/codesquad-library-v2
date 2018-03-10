@@ -1,6 +1,7 @@
 package com.codesquad.library.domain.authentication;
 
 import com.codesquad.library.domain.Book;
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import lombok.*;
@@ -24,6 +25,7 @@ public class Member {
     public enum MemberRoles {
         ADMIN("ADMIN"), USER("USER");
 
+        @JsonValue
         private String role;
 
         MemberRoles(String role) {
