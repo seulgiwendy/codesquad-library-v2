@@ -48,6 +48,7 @@ public class FormLoginFilter extends AbstractAuthenticationProcessingFilter {
             document = new ObjectMapper().readValue(httpServletRequest.getInputStream(), FormLoginDocument.class);
         } catch (Exception e) {
             log.error(e.getMessage());
+            throwSecurityException();
         }
 
         return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(document, document.getPassword(), null));

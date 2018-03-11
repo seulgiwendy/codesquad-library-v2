@@ -20,6 +20,10 @@ public class BookService {
         return bookRepository.save(book);
     }
 
+    public Book addBook(Book book) {
+        return bookRepository.save(book);
+    }
+
     public Book borrowBookbyBookid(Member member, long bookId) {
         Book book = bookRepository.findById(bookId).get();
 

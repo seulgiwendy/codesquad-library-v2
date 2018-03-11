@@ -1,13 +1,14 @@
 package com.codesquad.library.domain.exceptions;
 
 import com.codesquad.library.domain.exceptions.model.BaseModelException;
+import com.codesquad.library.domain.exceptions.security.BaseSecurityException;
 
 import java.util.Arrays;
 
 public enum ExceptionTypes {
 
     MODEL_RELATED(BaseModelException.class),
-    SECURITY_RELATED(null);
+    SECURITY_RELATED(BaseSecurityException.class);
 
     private Class<? extends ApplicationException> metaClass;
 
