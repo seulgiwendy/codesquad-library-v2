@@ -1,6 +1,7 @@
 package com.codesquad.library.domain.authentication;
 
 import com.codesquad.library.domain.Book;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
@@ -42,6 +43,7 @@ public class Member {
     private String loginEmail;
 
     @Column(columnDefinition = "VARCHAR(60) NOT NULL")
+    @JsonIgnore
     private String password;
 
     @Enumerated(EnumType.STRING)

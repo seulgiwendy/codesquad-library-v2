@@ -1,5 +1,6 @@
 package com.codesquad.library.security.config;
 
+import com.codesquad.library.security.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
