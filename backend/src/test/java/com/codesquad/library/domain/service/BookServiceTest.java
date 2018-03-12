@@ -4,6 +4,8 @@ import com.codesquad.library.domain.Book;
 import com.codesquad.library.domain.authentication.Member;
 import com.codesquad.library.domain.repositories.BookRepository;
 import com.codesquad.library.domain.repositories.MemberRepository;
+import com.codesquad.library.dtos.model.NewBookDocument;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -11,6 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -28,6 +32,7 @@ public class BookServiceTest {
     @Autowired
     private MemberRepository memberRepository;
 
+    private NewBookDocument newBookDocument;
     private Book book;
     private Member member;
 
@@ -46,18 +51,36 @@ public class BookServiceTest {
 
         this.book = bookRepository.save(this.book);
         this.member = memberRepository.save(this.member);
+        this.newBookDocument = new NewBookDocument("이말년 수필", "이말년", "지상 최강의 만화책! 삼류 스트리머 침착맨과 구분되는 킹갓말년의 컴백작! 이말년 씨~리~즈~!!!", "82101089");
+    }
+
+    @After
+    public void flushDatabase() {
+        this.bookRepository.deleteAll();
     }
 
     @Test
     public void RENT_BY_SERVICE_CLASS() {
-        this.bookService.borrowBookbyBookid(this.member, 1L);
+        this.bookService.borrowBookByTitle(this.member, "이말년씨리즈");
 
         assertThat(bookRepository.findByTitle("이말년씨리즈").get().getMember(), is(this.member));
 
-        this.bookService.returnBookbyBookId(this.member, 1L);
-        assertNull(bookRepository.findByTitle("이말년씨리즈").get().getMember());
 
-        assertThat(bookRepository.findByTitle("이말년씨리즈").get().isPossessed(), is(false));
+        assertNotNull(bookRepository.findByTitle("이말년씨리즈").get().getMember());
+
+        assertThat(bookRepository.findByTitle("이말년씨리즈").get().isPossessed(), is(true));
+    }
+
+    @Test
+    @Transactional
+    public void ADD_BOOK_BY_DTO() {
+        this.bookService.addBook(this.newBookDocument);
+        Optional<Book> targetBook = bookRepository.findByTitle("이말년 수필");
+
+
+        assertThat(targetBook.isPresent(), is(true));
+        assertThat(targetBook.get().getAuthor().getName(), is("이말년"));
+
     }
 
 

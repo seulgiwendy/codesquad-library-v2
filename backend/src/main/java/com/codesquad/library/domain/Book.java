@@ -5,6 +5,7 @@ import com.codesquad.library.domain.constraints.LongerThan;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import lombok.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -35,7 +36,7 @@ public class Book extends BaseEntity {
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = Lists.newArrayList();
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "AUTHOR_ID")
     private Author author;
 
@@ -44,6 +45,9 @@ public class Book extends BaseEntity {
     private Member member;
 
     private boolean isPossessed;
+
+    @Column(name = "SERIES_CODE")
+    private int seriesNumber;
 
     @Column(name = "BOOK_ISBN")
     private int isbn;
