@@ -19,14 +19,16 @@ class MainComponent extends Component {
                     </Nav>
                     <Nav className="navbar-personal" pullRight>
                             <Button bsStyle = "primary" activehref="#" id = "navbar-button"> Login </Button>
+                            <Button bsStyle = "warning" activehref="#" id = "navbar-button"> 관리자 콘솔 </Button>
                     </Nav>
                 </Navbar>
                 <div className="main-body">
                     <Jumbotron className = "main-jumbo">
-                        <h1 id="jumbotron-h1">코드스쿼드 도서관</h1>
-                        <p>
-                            코드스쿼드의 도서 관리와 대여를 위한 페이지입니다. <br/>
-                            책을 많이 읽읍시다.
+                        <span >
+                            <img className = "jumbo-img center-block" src="http://codesquad.kr/img/company/codesquad2.png"/>
+                        </span>
+                        <p className = "text-center">
+                            코드스쿼드의 도서 관리와 대여를 위한 페이지입니다. 책을 많이 읽읍시다.
                         </p>
                     </Jumbotron>
                     <br/>

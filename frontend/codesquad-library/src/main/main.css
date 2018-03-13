@@ -25,4 +25,9 @@
 #navbar-button {
     padding: 6px;
     margin-top: 8px;
+    margin-right: 10px;
+}
+
+.jumbo-img {
+    margin: 0 auto;
 }
