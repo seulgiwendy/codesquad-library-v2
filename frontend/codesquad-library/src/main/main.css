@@ -1,0 +1,28 @@
+.navbar-default {
+    background-color: black;
+    margin: 0;
+    }
+.navbar-letter {
+    color: white;
+}
+  
+.main-jumbo {
+    padding-left: 30px;
+    }
+  
+#jumbotron-h1 {
+    color: black;
+    }
+  
+#main-h1 {
+    text-align: center;
+    }
+  
+#navbar-menu {
+    color: white;
+    }
+
+#navbar-button {
+    padding: 6px;
+    margin-top: 8px;
+}

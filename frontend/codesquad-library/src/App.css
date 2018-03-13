@@ -32,7 +32,11 @@
 
 #jumbotron-h1{
   color: black;
-  
+ 
+}
+
+#main-h1{
+  text-align: center;
 }
 
 #navbar-menu{
