@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navbar, NavItem, MenuItem, NavDropdown, Nav, Jumbotron, Button} from 'react-bootstrap';
+import {Navbar, NavItem, MenuItem, NavDropdown, Nav, Jumbotron, Button, Panel, Alert} from 'react-bootstrap';
 import './main.css'
 
 class MainComponent extends Component {
@@ -25,7 +25,7 @@ class MainComponent extends Component {
                 <div className="main-body">
                     <Jumbotron className = "main-jumbo">
                         <span >
-                            <img className = "jumbo-img center-block" src="http://codesquad.kr/img/company/codesquad2.png"/>
+                            <img className = "jumbo-img center-block" src="http://codesquad.kr/img/company/codesquad2.png" width="10%" height="10%"/>
                         </span>
                         <p className = "text-center">
                             코드스쿼드의 도서 관리와 대여를 위한 페이지입니다. 책을 많이 읽읍시다.
@@ -33,8 +33,43 @@ class MainComponent extends Component {
                     </Jumbotron>
                     <br/>
                     <div className="main-body-lower">
-                        <h1 id="main-h1">책을 많이 읽읍시다.</h1>
+                        <h1 className="main-text">책을 많이 읽읍시다.</h1>
+                        <h3 className="main-text">여러분의 개발을 도와주는 많은 책들이 준비되어 있습니다.</h3>
                     </div>
+                </div>
+                <div className="container-fluid main-container">
+                    <Panel className="main-featured">
+                        <Panel.Body>
+                            Featured Articles
+                            <h1 className="main-text">포비의 책장</h1>
+                        </Panel.Body>
+                    </Panel>
+                    <Panel className="main-featured">
+                        <Panel.Body>
+                            Featured Articles
+                            <h1 className="main-text">호눅스의 책장</h1>
+                        </Panel.Body>
+                    </Panel>
+                    <Panel className="main-featured">
+                        <Panel.Body>
+                            Featured Articles
+                            <h1 className="main-text">크롱의 책장</h1>
+                        </Panel.Body>
+                    </Panel>
+                    <Panel className="main-featured">
+                        <Panel.Body>
+                            Featured Articles
+                            <h1 className="main-text">JK의 책장</h1>
+                        </Panel.Body>
+                    </Panel>
+                </div>
+                <div className="main-body-bottom">
+                    <Alert bsStyle="warning">
+                        책을 안 읽으면 멍청이가 됩니다. <strong>책을 읽으세요!</strong>
+                    </Alert>
+                    <Alert bsStyle="info">
+                        4월 다독자 시상이 있을 예정입니다.
+                    </Alert>
                 </div>
             </div>
         
