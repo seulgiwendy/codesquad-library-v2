@@ -1,5 +1,6 @@
 package com.codesquad.library.domain;
 
+import com.codesquad.library.dtos.model.NewArticleDocument;
 import lombok.*;
 
 import javax.persistence.Column;
@@ -13,7 +14,7 @@ import javax.persistence.Id;
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @Builder
-public class Article {
+public class Article extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -28,6 +29,14 @@ public class Article {
 
     @Column(name = "IS_URGENT")
     private boolean urgent;
+
+    public static Article getObjectByDto(NewArticleDocument document) {
+        return Article.builder()
+                .title(document.getTitle())
+                .content(document.getContent())
+                .urgent(document.getUrgent())
+                .build();
+    }
 
 
 }

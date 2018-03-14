@@ -1,7 +1,8 @@
 package com.codesquad.library.dtos.model
 
+import com.fasterxml.jackson.annotation.JsonProperty
+
 data class NewArticleDocument(
-        val title: String = "",
+        @JsonProperty(value = "TITLE_ARTICLE") val title: String = "",
         val content: String = "",
-        val urgent: Boolean = false
-)
+        val urgent: Boolean = false)

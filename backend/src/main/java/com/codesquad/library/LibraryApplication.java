@@ -1,6 +1,8 @@
 package com.codesquad.library;
 
+import com.codesquad.library.domain.Article;
 import com.codesquad.library.domain.authentication.Member;
+import com.codesquad.library.domain.repositories.ArticleRepository;
 import com.codesquad.library.domain.repositories.MemberRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -25,7 +27,7 @@ public class LibraryApplication {
 	}
 
 	@Bean
-    public CommandLineRunner commandLineRunner(PasswordEncoder passwordEncoder, MemberRepository memberRepository) {
+    public CommandLineRunner commandLineRunner(PasswordEncoder passwordEncoder, MemberRepository memberRepository, ArticleRepository articleRepository) {
 	    return args -> {
 	        String password = passwordEncoder.encode("1234");
 
@@ -37,6 +39,14 @@ public class LibraryApplication {
                     .build();
 
 	        memberRepository.save(member);
+
+	        Article article = Article.builder()
+                    .content("fuck you!")
+                    .title("fuck")
+                    .urgent(true)
+                    .build();
+
+	        articleRepository.save(article);
         };
     }
 }
