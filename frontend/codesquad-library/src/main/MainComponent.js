@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Navbar, NavItem, MenuItem, NavDropdown, Nav, Jumbotron, Button, Panel, Alert} from 'react-bootstrap';
+import {Navbar, NavItem, MenuItem, NavDropdown, Nav, Jumbotron, Button, Panel, Alert, Glyphicon} from 'react-bootstrap';
 import './main.css'
 
 class MainComponent extends Component {
@@ -55,13 +55,14 @@ class MainComponent extends Component {
                             Featured Articles
                             <h1 className="main-text">크롱의 책장</h1>
                         </Panel.Body>
-                    </Panel>
+                    </Panel>                    
                     <Panel className="main-featured">
                         <Panel.Body>
                             Featured Articles
                             <h1 className="main-text">JK의 책장</h1>
                         </Panel.Body>
                     </Panel>
+                    
                 </div>
                 <div className="main-body-bottom">
                     <Alert bsStyle="warning">
@@ -70,6 +71,12 @@ class MainComponent extends Component {
                     <Alert bsStyle="info">
                         4월 다독자 시상이 있을 예정입니다.
                     </Alert>
+                </div>
+                <div className="container-fluid default-footer">
+                    <div className="footer-content">
+                        <p>Made with <Glyphicon glyph="heart"/> by wheejuni, All rights reserved.</p>
+                        <p><Glyphicon glyph="envelope"/> &nbsp;<a href="mailto:me@wheejuni.com" id="footer-mail">me@wheejuni.com</a></p>
+                    </div>
                 </div>
             </div>
         
