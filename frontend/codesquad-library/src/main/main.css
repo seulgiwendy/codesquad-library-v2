@@ -3,10 +3,11 @@
     margin: 0;
     }
 .navbar-letter {
-    color: white;
+    color: cyan;
 }
   
 .main-jumbo {
+    padding-top: 120px;
     padding-left: 30px;
     }
   
@@ -22,6 +23,10 @@
     text-align: center;
 }
   
+#navbar-title {
+    color: rgb(204, 0, 255);
+}
+
 #navbar-menu {
     color: white;
     }

@@ -6,10 +6,10 @@ class MainComponent extends Component {
     render() {
         return (
             <div className="main">
-                <Navbar className="navbar-default">
+                <Navbar className="navbar-default" fixedTop={true}>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            Codesquad Library
+                            <strong id="navbar-title">Codesquad Library</strong>
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav className="navbar-letter">
