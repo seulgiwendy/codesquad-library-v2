@@ -1,6 +1,7 @@
 package com.codesquad.library.dtos.model
 
 import com.codesquad.library.domain.Article
+import com.codesquad.library.dtos.model.article.NewArticleDocument
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.Assert.*
 import org.junit.Before

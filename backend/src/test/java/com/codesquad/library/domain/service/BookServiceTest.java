@@ -1,14 +1,18 @@
 package com.codesquad.library.domain.service;
 
+import com.codesquad.library.domain.Author;
 import com.codesquad.library.domain.Book;
 import com.codesquad.library.domain.authentication.Member;
 import com.codesquad.library.domain.repositories.BookRepository;
 import com.codesquad.library.domain.repositories.MemberRepository;
-import com.codesquad.library.dtos.model.NewBookDocument;
+import com.codesquad.library.dtos.model.book.NewBookDocument;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -22,6 +26,8 @@ import static org.junit.Assert.*;
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class BookServiceTest {
+
+    private static final Logger log = LoggerFactory.getLogger(BookServiceTest.class);
 
     @Autowired
     private BookService bookService;
@@ -49,9 +55,11 @@ public class BookServiceTest {
                 .name("양희정")
                 .build();
 
+        this.book.setAuthor(Author.builder().name("이말년").build());
+
         this.book = bookRepository.save(this.book);
         this.member = memberRepository.save(this.member);
-        this.newBookDocument = new NewBookDocument("이말년 수필", "이말년", "지상 최강의 만화책! 삼류 스트리머 침착맨과 구분되는 킹갓말년의 컴백작! 이말년 씨~리~즈~!!!", "82101089");
+        this.newBookDocument = new NewBookDocument("이말년 수필", "이말년", "지상 최강의 만화책! 삼류 스트리머 침착맨과 구분되는 킹갓말년의 컴백작! 이말년 씨~리~즈~!!!", "82101089", null, null);
     }
 
     @After
@@ -65,10 +73,6 @@ public class BookServiceTest {
 
         assertThat(bookRepository.findByTitle("이말년씨리즈").get().getMember(), is(this.member));
 
-
-        assertNotNull(bookRepository.findByTitle("이말년씨리즈").get().getMember());
-
-        assertThat(bookRepository.findByTitle("이말년씨리즈").get().isPossessed(), is(true));
     }
 
     @Test
@@ -81,6 +85,11 @@ public class BookServiceTest {
         assertThat(targetBook.isPresent(), is(true));
         assertThat(targetBook.get().getAuthor().getName(), is("이말년"));
 
+    }
+
+    @Test
+    public void GET_ALL_BOOKS_DTO() throws Exception {
+        log.debug(new ObjectMapper().writeValueAsString(this.bookService.getAllBooks()));
     }
 
 

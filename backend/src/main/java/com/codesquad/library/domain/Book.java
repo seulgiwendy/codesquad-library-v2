@@ -2,6 +2,9 @@ package com.codesquad.library.domain;
 
 import com.codesquad.library.domain.authentication.Member;
 import com.codesquad.library.domain.constraints.LongerThan;
+import com.codesquad.library.dtos.model.book.BookDocument;
+import com.codesquad.library.dtos.model.book.NewBookDocument;
+import com.codesquad.library.dtos.model.review.ReviewDocument;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import lombok.*;
@@ -11,6 +14,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Getter
@@ -19,7 +23,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor(access = AccessLevel.PACKAGE)
 @AllArgsConstructor(access = AccessLevel.PACKAGE)
-public class Book extends BaseEntity {
+public class Book {
 
     @Id
     @GeneratedValue
@@ -44,6 +48,10 @@ public class Book extends BaseEntity {
     @JoinColumn(name = "RENT_MEMBER_ID")
     private Member member;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "FEATURED_ID")
+    private Featured featured;
+
     private boolean isPossessed;
 
     @Column(name = "SERIES_CODE")
@@ -51,6 +59,14 @@ public class Book extends BaseEntity {
 
     @Column(name = "BOOK_ISBN")
     private int isbn;
+
+    @Column(name = "BOOK_LOCATION")
+    @Enumerated(EnumType.STRING)
+    private BookLocations bookLocations;
+
+    @Column(name = "BOOK_CATEGORY")
+    @Enumerated(EnumType.STRING)
+    private BookCategories bookCategories;
 
     @Column(name = "LAST_RENT_DATE")
     private LocalDateTime lastRentDate;
@@ -90,6 +106,20 @@ public class Book extends BaseEntity {
 
         this.reviews.add(review);
         review.setBook(this);
+    }
+
+    public BookDocument generateDocument() {
+        List<ReviewDocument> reviewDocuments = this.reviews.stream().map(r -> r.generateDocument()).collect(Collectors.toList());
+
+        return new BookDocument("book", this.id, this.title, this.description, reviewDocuments, this.author, this.isPossessed, this.seriesNumber);
+    }
+
+    public Book getObjectByDocument(NewBookDocument document) {
+        return Book.builder()
+                .title(document.getTitle())
+                .description(document.getDescription())
+                .isbn(Integer.parseInt(document.getIsbn()))
+                .build();
     }
 
     @Override

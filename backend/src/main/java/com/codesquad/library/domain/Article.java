@@ -1,6 +1,6 @@
 package com.codesquad.library.domain;
 
-import com.codesquad.library.dtos.model.NewArticleDocument;
+import com.codesquad.library.dtos.model.article.NewArticleDocument;
 import lombok.*;
 
 import javax.persistence.Column;

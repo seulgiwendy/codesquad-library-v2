@@ -6,10 +6,14 @@ import com.codesquad.library.domain.authentication.Member;
 import com.codesquad.library.domain.exceptions.model.NoBookExistsException;
 import com.codesquad.library.domain.repositories.AuthorRepository;
 import com.codesquad.library.domain.repositories.BookRepository;
-import com.codesquad.library.dtos.model.NewBookDocument;
+import com.codesquad.library.dtos.model.book.BookDocument;
+import com.codesquad.library.dtos.model.book.NewBookDocument;
+import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @Transactional
@@ -20,6 +24,13 @@ public class BookService {
 
     @Autowired
     private AuthorRepository authorRepository;
+
+    public List<BookDocument> getAllBooks() {
+        List<BookDocument> books = Lists.newArrayList();
+
+        bookRepository.findAll().forEach(b -> books.add(b.generateDocument()));
+        return books;
+    }
 
     public Book borrowBook(Member member, Book book) {
         book.setPossessed(member);
@@ -50,10 +61,9 @@ public class BookService {
     }
 
     public Book borrowBookbyBookid(Member member, long bookId) {
-        Book book = bookRepository.findById(bookId).get();
+        Book book = bookRepository.findById(bookId).orElseThrow(() -> new NoBookExistsException("해당 ID를 가진 책이 없습니다."));
 
         book.setPossessed(member);
-
         return book;
     }
 

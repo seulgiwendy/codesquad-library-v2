@@ -16,7 +16,7 @@ public class ApplicationException extends RuntimeException {
         super(message);
         this.code = ErrorCodes.INTERNAL_ERROR;
         this.status = HttpStatus.INTERNAL_SERVER_ERROR;
-        this.message = "unexpected internal error occurred.";
+        this.message = message;
     }
 
     public ApplicationException(ErrorCodes code, HttpStatus status, String message) {
