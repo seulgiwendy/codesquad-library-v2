@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Navbar, NavItem, MenuItem, NavDropdown, Nav, Jumbotron, Button, Panel, Alert, Glyphicon} from 'react-bootstrap';
 import MainNavbar from './main-navbar/MainNavbar';
 import MainJumbotron from './main-jumbo/MainJumbotron';
 import MainFooter from './MainFooter';

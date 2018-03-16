@@ -1,11 +1,12 @@
 import '../main.css';
 import React, { Component } from 'react';
-import {Nav, Navbar, NavItem, Button} from 'react-bootstrap';
+import {Nav, Navbar, NavItem, Button, FormGroup, FormControl, Glyphicon, InputGroup} from 'react-bootstrap';
 
 class MainNavbar extends Component {
     render() {
         return(
             <div className="navbar-default">
+            
             <Navbar className="navbar-default" fixedTop={true}>
                     <Navbar.Header>
                         <Navbar.Brand>
@@ -16,12 +17,20 @@ class MainNavbar extends Component {
                             <NavItem id = "navbar-menu" activehref="#"> 도서검색 </NavItem>
                             <NavItem id = "navbar-menu" activehref="#"> 도서관리 </NavItem>
                             <NavItem id = "navbar-menu" activehref="#"> 대출정보 </NavItem>
+                            <li role="presentation">
+                                <form className="form-inline navbar-search">
+                                    <input className="form-control mr-sm-2 search-area" type="search" placeholder="제목으로 검색..." aria-label="search"/>
+                                    <button className="btn btn-default my-2 my-sm-0 search-button" type="submit"><Glyphicon glyph="search"/></button>
+                                </form>
+                            </li>
                     </Nav>
+                    
+                    
                     <Nav className="navbar-personal" pullRight>
                             <Button bsStyle = "primary" activehref="#" id = "navbar-button"> Login </Button>
-                            <Button bsStyle = "warning" activehref="#" id = "navbar-button"> 관리자 콘솔 </Button>
                     </Nav>
                 </Navbar>
+                
             </div>
         )
     }
