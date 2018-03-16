@@ -1,0 +1,14 @@
+.search-view {
+    padding-top: 100px;
+    height: auto;
+}
+
+.search-form {
+    margin-top: 50px;
+    width: 60%;
+}
+
+.search-component {
+    height: calc(100vh - 150px);
+}
+
