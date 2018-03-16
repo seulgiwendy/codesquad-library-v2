@@ -1,5 +1,6 @@
 import '../main.css';
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
 import {Nav, Navbar, NavItem, Button, FormGroup, FormControl, Glyphicon, InputGroup} from 'react-bootstrap';
 
 class MainNavbar extends Component {
@@ -14,7 +15,7 @@ class MainNavbar extends Component {
                         </Navbar.Brand>
                     </Navbar.Header>
                     <Nav className="navbar-letter">
-                            <NavItem id = "navbar-menu" activehref="#"> 도서검색 </NavItem>
+                            <NavItem id = "navbar-menu"> <Link to={'/search'} id="navbar-menu">도서검색 </Link></NavItem>
                             <NavItem id = "navbar-menu" activehref="#"> 도서관리 </NavItem>
                             <NavItem id = "navbar-menu" activehref="#"> 대출정보 </NavItem>
                             <li role="presentation">
