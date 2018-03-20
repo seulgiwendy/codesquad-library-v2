@@ -13,6 +13,7 @@ cache:
 script: './mvnw clean package'
 
 before_deploy:
+  - echo ls -al
   - zip -r codesquad-library *
   - mkdir -p deploy
   - mv codesquad-library.zip deploy/codesquad-library.zip
