@@ -11,3 +11,21 @@ cache:
     - '$HOME/.maven'
 
 script: './mvnw clean package'
+
+before_deploy:
+  - zip -r codesquad-library *
+  - mkdir -p deploy
+  - mv codesquad-library.zip deploy/codesquad-library.zip
+
+deploy:
+  - provider: s3
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: printboard-backend-deploy
+    region: ap-northeast-2
+    skip_cleanup: true
+    acl: public_read
+    wait_until_deployed: true
+    on:
+      repo: seulgiwendy/codesquad-library-v2
+      branch: master
