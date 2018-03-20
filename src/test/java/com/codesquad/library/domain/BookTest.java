@@ -3,6 +3,7 @@ package com.codesquad.library.domain;
 import com.codesquad.library.domain.authentication.Member;
 import com.codesquad.library.domain.repositories.BookRepository;
 import com.codesquad.library.domain.repositories.MemberRepository;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -59,6 +60,12 @@ public class BookTest {
 
         this.member = memberRepository.save(member);
         this.book = this.bookRepository.save(book);
+    }
+
+    @After
+    public void flushDB() {
+        this.bookRepository.deleteAll();
+        this.memberRepository.deleteAll();
     }
 
     @Test
