@@ -16,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.validation.Validator;
 
+import java.time.LocalDateTime;
+
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
@@ -67,7 +69,7 @@ public class BookTest {
         bookRepository.save(this.book);
 
         assertThat(bookRepository.findByTitle("이말년씨리즈").get().getMember(), is(this.member));
-        assertThat(bookRepository.findByTitle("이말년씨리즈").get().getLastRentDate().getDayOfMonth(), is(6));
+        assertThat(bookRepository.findByTitle("이말년씨리즈").get().getLastRentDate().getDayOfMonth(), is(LocalDateTime.now().getDayOfMonth()));
         assertThat(memberRepository.findByLoginEmail("lemon@codesquad.kr").get().getLendedBooks().get(0), is(this.book));
     }
 
