@@ -32,3 +32,24 @@ deploy:
     on:
       repo: seulgiwendy/codesquad-library-v2
       branch: master
+
+deploy:
+  - provider: codedeploy
+    access_key_id: $AWS_ACCESS_KEY
+    secret_access_key: $AWS_SECRET_KEY
+    bucket: codesquad-library-backend
+    key: codesquad-library.zip
+    bundle_type: zip
+    application: codesquad-library
+    deployment_group: codesquad-library-backend
+    region: ap-northeast-2
+    wait-until-deployed: true
+    on:
+      repo: seulgiwendy/codesquad-library-v2
+      branch: master
+
+notifications:
+  email:
+    recipients:
+      - me@wheejuni.com
+
