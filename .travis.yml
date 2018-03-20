@@ -15,6 +15,7 @@ script: './mvnw clean package'
 before_deploy:
   - ls -al
   - zip -r codesquad-library *
+  - zipinfo -m codesquad-library.zip
   - mkdir -p deploy
   - mv codesquad-library.zip deploy/codesquad-library.zip
 
