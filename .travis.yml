@@ -39,7 +39,7 @@ deploy:
     access_key_id: $AWS_ACCESS_KEY
     secret_access_key: $AWS_SECRET_KEY
     bucket: codesquad-library-backend
-    key: deploy/codesquad-library.zip
+    key: codesquad-library.zip
     bundle_type: zip
     application: codesquad-library
     deployment_group: codesquad-library-backend
