@@ -1,3 +1,3 @@
 #!/bin/bash
 
-echo "hey! codedeploy did its job! you take care of the rest!" &> /home/ubuntu/hey.txt
+/home/ubuntu/app/nonstop/scripts/deploy-library.sh 1> /home/ubuntu/library-deploy-log 2> /home/ubuntu/library-deploy-error-log &
