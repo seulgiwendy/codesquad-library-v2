@@ -30,9 +30,11 @@ public class LibraryApplication {
 			+ "/home/ubuntu/app/nonstop/config/library-config.yml";
 
 	public static void main(String[] args) {
-	    new SpringApplicationBuilder(LibraryApplication.class)
+        new SpringApplicationBuilder(LibraryApplication.class)
+                .sources(LibraryApplication.class)
                 .properties(APPLICATION_LOCATIONS)
-                .build();
+                .build()
+                .run(args);
 	}
 
 	@Bean
