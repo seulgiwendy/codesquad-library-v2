@@ -2,7 +2,7 @@ version: 0.0
 os: linux
 files:
   - source: /
-    destination: /home/ubuntu/app/nonstop/build/library
+    destination: /home/ubuntu/app/nonstop/build-library
 
 hooks:
   AfterInstall:
