@@ -1,6 +1,7 @@
 package com.codesquad.library.security.config;
 
 import com.codesquad.library.security.CustomAuthenticationManager;
+import com.codesquad.library.security.DefaultAccessDeniedHandler;
 import com.codesquad.library.security.filters.FormLoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +22,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 
     @Autowired
     private JwtAccessTokenConverter converter;
+
+    @Autowired
+    private DefaultAccessDeniedHandler accessDeniedHandler;
 
     @Value("${oauth.resource.id}")
     private String resourceId;

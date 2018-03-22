@@ -3,6 +3,7 @@ package com.codesquad.library.domain.exceptions.model;
 import com.codesquad.library.domain.exceptions.ApplicationException;
 import com.codesquad.library.domain.exceptions.ErrorCodes;
 import com.codesquad.library.domain.exceptions.ExceptionTypes;
+import com.codesquad.library.dtos.exceptions.ExceptionsDocument;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 

@@ -1,5 +1,6 @@
 package com.codesquad.library.domain.exceptions;
 
+import com.codesquad.library.dtos.exceptions.ExceptionsDocument;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
@@ -24,6 +25,10 @@ public class ApplicationException extends RuntimeException {
         this.code = code;
         this.status = status;
         this.message = message;
+    }
+
+    public ExceptionsDocument generateDocument() {
+        return new ExceptionsDocument(this.code.getCode(), this.message, this.status);
     }
 
 }
