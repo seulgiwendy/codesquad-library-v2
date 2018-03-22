@@ -3,6 +3,7 @@ package com.codesquad.library.security.config;
 import com.codesquad.library.security.ActiveUserDetailsService;
 import com.codesquad.library.security.CustomAuthenticationManager;
 import com.codesquad.library.security.CustomAuthenticationProvider;
+import com.codesquad.library.security.filters.AuthenticationExceptionsFilter;
 import com.codesquad.library.security.filters.FormLoginFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -52,6 +53,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
         FilterRegistrationBean bean = new FilterRegistrationBean(new CorsFilter(source));
         bean.setOrder(Ordered.HIGHEST_PRECEDENCE + 1);
+
+        return bean;
+    }
+
+    @Bean
+    public FilterRegistrationBean securityExceptionFilter() {
+        FilterRegistrationBean bean = new FilterRegistrationBean(new AuthenticationExceptionsFilter());
+        bean.setOrder(Ordered.HIGHEST_PRECEDENCE);
 
         return bean;
     }

@@ -1,5 +1,6 @@
 package com.codesquad.library.security.config;
 
+import com.codesquad.library.domain.exceptions.resolvers.translator.AuthenticationExceptionTranslator;
 import com.codesquad.library.security.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -32,6 +33,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private AuthenticationExceptionTranslator exceptionTranslator;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -79,6 +83,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .tokenStore(tokenStore())
                 .accessTokenConverter(accessTokenConverter())
                 .tokenEnhancer(enhancerChain)
+                .exceptionTranslator(exceptionTranslator)
                 .authenticationManager(authenticationManager);
     }
 }

@@ -2,10 +2,10 @@ package com.codesquad.library.domain.exceptions.security;
 
 import com.codesquad.library.domain.exceptions.ApplicationException;
 import com.codesquad.library.domain.exceptions.ErrorCodes;
+import com.codesquad.library.dtos.exceptions.ExceptionsDocument;
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
-@Getter
 public class BaseSecurityException extends ApplicationException{
 
     private ErrorCodes code = ErrorCodes.SECURITY_ERROR;
@@ -18,4 +18,10 @@ public class BaseSecurityException extends ApplicationException{
         this.status = status;
         this.message = message;
     }
+
+    public BaseSecurityException(String message) {
+        super(ErrorCodes.SECURITY_ERROR, HttpStatus.UNAUTHORIZED, message);
+        this.message = message;
+    }
+
 }
