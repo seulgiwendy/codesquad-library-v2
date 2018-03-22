@@ -1,6 +1,6 @@
 package com.codesquad.library.domain.exceptions.resolvers
 
-import com.codesquad.library.domain.exceptions.security.BaseSecurityException
+import com.codesquad.library.domain.exceptions.ApplicationException
 import com.codesquad.library.dtos.exceptions.ExceptionsDocument
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.slf4j.Logger
@@ -14,16 +14,19 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 @Component
-class BaseSecurityExceptionResolver: HandlerExceptionResolver {
+class ApplicationExceptionsResolver: HandlerExceptionResolver {
 
-    private val logger: Logger = LoggerFactory.getLogger(BaseSecurityExceptionResolver::class.java)
+    private val logger: Logger = LoggerFactory.getLogger(ApplicationExceptionsResolver::class.java)
 
-    override fun resolveException(req: HttpServletRequest?, res: HttpServletResponse?, obj: Any?, e: Exception?): ModelAndView? {
-        if (e is BaseSecurityException) {
-            var securityException: BaseSecurityException = e as BaseSecurityException
+    override fun resolveException(req: HttpServletRequest, res: HttpServletResponse, obj: Any, e: Exception): ModelAndView? {
+        if (e is ApplicationException) {
+            var appException: ApplicationException = e
             logger.debug("Base Security Exception Caught!")
-            TODO("write baseexception -> exceptiondocument logic first!")
-            return null
+
+            var document: ExceptionsDocument = appException.generateDocument()
+            sendResponse(res, document)
+
+            return ModelAndView()
         }
         return null
     }

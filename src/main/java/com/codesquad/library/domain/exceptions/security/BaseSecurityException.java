@@ -19,4 +19,9 @@ public class BaseSecurityException extends ApplicationException{
         this.message = message;
     }
 
+    public BaseSecurityException(String message) {
+        super(ErrorCodes.SECURITY_ERROR, HttpStatus.UNAUTHORIZED, message);
+        this.message = message;
+    }
+
 }
