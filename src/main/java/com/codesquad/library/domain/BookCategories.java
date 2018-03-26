@@ -1,6 +1,7 @@
 package com.codesquad.library.domain;
 
 import com.codesquad.library.domain.exceptions.model.NoCategoryMatchingException;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
@@ -23,6 +24,7 @@ public enum BookCategories {
     private int code;
 
     @JsonValue
+    @JsonProperty("category")
     private String label;
 
     BookCategories(int code, String label) {
