@@ -31,7 +31,7 @@ class ApplicationExceptionsResolver: HandlerExceptionResolver {
         return null
     }
 
-    fun sendResponse(res: HttpServletResponse, doc: ExceptionsDocument) {
+    private fun sendResponse(res: HttpServletResponse, doc: ExceptionsDocument) {
         res.status = doc.httpStatus.value()
         res.contentType = MediaType.APPLICATION_JSON_UTF8_VALUE
         res.writer.write(ObjectMapper().writeValueAsString(doc))

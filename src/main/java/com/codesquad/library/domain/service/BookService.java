@@ -46,7 +46,7 @@ public class BookService {
         Book book = Book.builder()
                 .title(document.getTitle())
                 .description(document.getDescription())
-                .isbn(Integer.parseInt(document.getIsbn()))
+                .isbn(document.getIsbn())
                 .build();
 
         Author author = authorRepository.findByName(document.getAuthor()).orElse(

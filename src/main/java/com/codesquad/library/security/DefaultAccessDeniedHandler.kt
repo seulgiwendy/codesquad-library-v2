@@ -21,7 +21,7 @@ class DefaultAccessDeniedHandler {
         log.debug("access denied exception!")
         log.debug(e.message)
 
-        var document = ExceptionsDocument(e)
+        val document = ExceptionsDocument(e)
 
         return ResponseEntity
                 .status(document.httpStatus)

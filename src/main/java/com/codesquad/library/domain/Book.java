@@ -33,7 +33,6 @@ public class Book {
     @NotNull
     private String title;
 
-    @LongerThan(message = "설명은 30자 이상이여야 합니다.", length = 30)
     @Column(name = "BOOK_DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
@@ -58,7 +57,7 @@ public class Book {
     private int seriesNumber;
 
     @Column(name = "BOOK_ISBN")
-    private int isbn;
+    private String isbn;
 
     @Column(name = "BOOK_LOCATION")
     @Enumerated(EnumType.STRING)
@@ -118,7 +117,7 @@ public class Book {
         return Book.builder()
                 .title(document.getTitle())
                 .description(document.getDescription())
-                .isbn(Integer.parseInt(document.getIsbn()))
+                .isbn(document.getIsbn())
                 .build();
     }
 

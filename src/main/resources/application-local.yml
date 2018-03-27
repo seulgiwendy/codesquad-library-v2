@@ -33,3 +33,9 @@ oauth:
 bean:
   constraint:
     password-length: 8
+
+naver:
+  book:
+    endpoint: openapi.naver.com
+    accessKey: A7t6chcO6XlnFYtoXRl2
+    secretKey: X7rQRT7vgZ
