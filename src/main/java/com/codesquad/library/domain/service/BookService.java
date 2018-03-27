@@ -7,6 +7,7 @@ import com.codesquad.library.domain.exceptions.model.NoBookExistsException;
 import com.codesquad.library.domain.repositories.AuthorRepository;
 import com.codesquad.library.domain.repositories.BookRepository;
 import com.codesquad.library.dtos.model.book.BookDocument;
+import com.codesquad.library.dtos.model.book.BookQueryDocument;
 import com.codesquad.library.dtos.model.book.NewBookDocument;
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,8 @@ public class BookService {
                 .title(document.getTitle())
                 .description(document.getDescription())
                 .isbn(document.getIsbn())
+                .bookCategories(document.getCategory())
+                .bookLocations(document.getLocation())
                 .build();
 
         Author author = authorRepository.findByName(document.getAuthor()).orElse(
@@ -80,6 +83,10 @@ public class BookService {
         //TODO throws an exception if lender - requested member does not match.
         book.returnBook(member);
         return book;
+    }
+
+    public List<Book> searchBookByQuery(BookQueryDocument document) {
+        return bookRepository.findByQuery(document);
     }
 
 }
