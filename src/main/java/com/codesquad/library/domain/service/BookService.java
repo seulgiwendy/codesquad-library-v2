@@ -2,6 +2,7 @@ package com.codesquad.library.domain.service;
 
 import com.codesquad.library.domain.Author;
 import com.codesquad.library.domain.Book;
+import com.codesquad.library.domain.BookCategories;
 import com.codesquad.library.domain.authentication.Member;
 import com.codesquad.library.domain.exceptions.model.NoBookExistsException;
 import com.codesquad.library.domain.repositories.AuthorRepository;
@@ -10,11 +11,13 @@ import com.codesquad.library.dtos.model.book.BookDocument;
 import com.codesquad.library.dtos.model.book.BookQueryDocument;
 import com.codesquad.library.dtos.model.book.NewBookDocument;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Streams;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -48,7 +51,7 @@ public class BookService {
                 .title(document.getTitle())
                 .description(document.getDescription())
                 .isbn(document.getIsbn())
-                .bookCategories(document.getCategory())
+                .bookCategories(BookCategories.findByLabel(document.getCategory()))
                 .bookLocations(document.getLocation())
                 .build();
 
@@ -87,6 +90,10 @@ public class BookService {
 
     public List<Book> searchBookByQuery(BookQueryDocument document) {
         return bookRepository.findByQuery(document);
+    }
+
+    public List<BookDocument> searchBookByQuery() {
+        return Streams.stream(bookRepository.findAll()).map(b -> b.generateDocument()).collect(Collectors.toList());
     }
 
 }

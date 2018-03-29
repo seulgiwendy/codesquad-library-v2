@@ -10,6 +10,6 @@ data class NewBookDocument(
         val author : String = "",
         val description : String = "",
         val isbn : String = "",
-        val category : BookCategories? = null,
+        val category : String? = null,
         val location : BookLocations? = null
 )

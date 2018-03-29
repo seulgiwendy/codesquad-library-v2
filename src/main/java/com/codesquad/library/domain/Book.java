@@ -108,6 +108,10 @@ public class Book {
     }
     //TODO implement document-return logic.
 
+    public BookDocument generateDocument() {
+        return new BookDocument("book", this.id, this.title, this.description, null, this.author, this.isPossessed, this.seriesNumber, BookStatus.generateStatus(this), this.bookCategories, this.bookLocations);
+    }
+
     public Book getObjectByDocument(NewBookDocument document) {
         return Book.builder()
                 .title(document.getTitle())
@@ -115,6 +119,7 @@ public class Book {
                 .isbn(document.getIsbn())
                 .build();
     }
+
 
     @Override
     public boolean equals(Object o) {
