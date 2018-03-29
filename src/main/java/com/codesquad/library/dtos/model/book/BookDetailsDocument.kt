@@ -1,5 +1,7 @@
 package com.codesquad.library.dtos.model.book
 
+import com.codesquad.library.domain.BookStatus
+
 data class BookDetailsDocument(
         val title: String = "",
         val link: String = "",

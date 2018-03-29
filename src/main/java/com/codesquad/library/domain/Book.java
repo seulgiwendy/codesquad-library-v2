@@ -106,12 +106,7 @@ public class Book {
         this.reviews.add(review);
         review.setBook(this);
     }
-
-    public BookDocument generateDocument() {
-        List<ReviewDocument> reviewDocuments = this.reviews.stream().map(r -> r.generateDocument()).collect(Collectors.toList());
-
-        return new BookDocument("book", this.id, this.title, this.description, reviewDocuments, this.author, this.isPossessed, this.seriesNumber);
-    }
+    //TODO implement document-return logic.
 
     public Book getObjectByDocument(NewBookDocument document) {
         return Book.builder()

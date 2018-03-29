@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/info")
 @RestController
 @CrossOrigin
-class ApiInfoController constructor(val featuredRepository: FeaturedRepository, val articleRepository: ArticleRepository) {
+class ApiInfoController constructor(private val featuredRepository: FeaturedRepository, private val articleRepository: ArticleRepository) {
 
     @GetMapping("/categories")
     fun getCategories(): List<BookCategories> {
