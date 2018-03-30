@@ -6,7 +6,7 @@ data class BookQueryDocument(
         val criteria: String = "",
         val query: String = ""
 ) {
-    fun getCriteria() : BookSearchCriteria {
+    fun getSearchCriteria() : BookSearchCriteria {
         return BookSearchCriteria.findByLabel(this.criteria)
     }
 }

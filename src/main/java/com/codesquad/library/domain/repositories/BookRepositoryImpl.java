@@ -34,16 +34,16 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 
         Join<Book, Author> author = root.join("author", JoinType.LEFT);
 
-        if(document.getCriteria() == BookSearchCriteria.AUTHOR) {
-            conditions.add(cb.equal(author.get(Author_.name).as(String.class), document.getQuery()));
+        if(document.getSearchCriteria() == BookSearchCriteria.AUTHOR) {
+            conditions.add(cb.like(author.get(Author_.name).as(String.class), generateLikeParameter(document.getQuery())));
         }
 
-        if(document.getCriteria() == BookSearchCriteria.TITLE) {
-            conditions.add(cb.equal(root.get(Book_.title).as(String.class), document.getQuery()));
+        if(document.getSearchCriteria() == BookSearchCriteria.TITLE) {
+            conditions.add(cb.like(root.get(Book_.title).as(String.class), generateLikeParameter(document.getQuery())));
         }
 
-        if(document.getCriteria() == BookSearchCriteria.ISBN) {
-            conditions.add(cb.equal(root.get(Book_.isbn), document.getQuery()));
+        if(document.getSearchCriteria() == BookSearchCriteria.ISBN) {
+            conditions.add(cb.like(root.get(Book_.isbn), generateLikeParameter(document.getQuery())));
         }
 
         log.debug(conditions.toString());
@@ -52,5 +52,15 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
         TypedQuery<Book> bookTypedQuery = entityManager.createQuery(query);
 
         return bookTypedQuery.getResultList();
+    }
+
+    private String generateLikeParameter(String query) {
+        StringBuilder sb = new StringBuilder();
+
+        sb.append("%");
+        sb.append(query);
+        sb.append("%");
+
+        return sb.toString();
     }
 }
