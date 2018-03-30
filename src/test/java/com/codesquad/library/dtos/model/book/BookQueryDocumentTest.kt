@@ -21,7 +21,7 @@ class BookQueryDocumentTest {
 
     private val log: Logger = LoggerFactory.getLogger(BookQueryDocument::class.java)
 
-    var queryDoc: BookQueryDocument = BookQueryDocument(BookSearchCriteria.TITLE, "이말년씨리즈")
+    var queryDoc: BookQueryDocument = BookQueryDocument("title", "이말년씨리즈")
 
     @Autowired
     lateinit var repo: BookRepository

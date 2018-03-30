@@ -106,11 +106,10 @@ public class Book {
         this.reviews.add(review);
         review.setBook(this);
     }
+    //TODO implement document-return logic.
 
     public BookDocument generateDocument() {
-        List<ReviewDocument> reviewDocuments = this.reviews.stream().map(r -> r.generateDocument()).collect(Collectors.toList());
-
-        return new BookDocument("book", this.id, this.title, this.description, reviewDocuments, this.author, this.isPossessed, this.seriesNumber);
+        return new BookDocument("book", this.id, this.title, this.description, null, this.author, this.isPossessed, this.seriesNumber, BookStatus.generateStatus(this), this.bookCategories, this.bookLocations);
     }
 
     public Book getObjectByDocument(NewBookDocument document) {
@@ -120,6 +119,7 @@ public class Book {
                 .isbn(document.getIsbn())
                 .build();
     }
+
 
     @Override
     public boolean equals(Object o) {

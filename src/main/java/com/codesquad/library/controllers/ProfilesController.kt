@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
-class ProfilesController constructor(var environment: Environment) {
+class ProfilesController constructor(private val environment: Environment) {
 
     @GetMapping("/profile")
     fun getProfile() : String {
