@@ -36,6 +36,9 @@ public class Book {
     @Column(name = "BOOK_DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
+    @Column(name= "IMAGE_URL", columnDefinition = "VARCHAR(100) NULL")
+    private String imageHref;
+
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = Lists.newArrayList();
 
@@ -109,7 +112,9 @@ public class Book {
     //TODO implement document-return logic.
 
     public BookDocument generateDocument() {
-        return new BookDocument("book", this.id, this.title, this.description, null, this.author, this.isPossessed, this.seriesNumber, BookStatus.generateStatus(this), this.bookCategories, this.bookLocations);
+        List<ReviewDocument> reviews = this.reviews.stream().map(r -> r.generateDocument()).collect(Collectors.toList());
+
+        return new BookDocument("book", this.id, this.title, this.description, this.imageHref, reviews, this.author, this.isPossessed, this.seriesNumber, BookStatus.generateStatus(this), this.bookCategories, this.bookLocations);
     }
 
     public Book getObjectByDocument(NewBookDocument document) {

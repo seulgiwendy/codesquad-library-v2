@@ -11,6 +11,7 @@ data class BookDocument(
         val bookId: Long,
         val title: String,
         val description: String,
+        val imageHref: String? = "ssibal! no image!",
         val reviews: List<ReviewDocument>? = null,
         val author: Author,
         val possessed: Boolean,

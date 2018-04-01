@@ -2,6 +2,7 @@ package com.codesquad.library.domain.service
 
 import com.codesquad.library.domain.Book
 import com.codesquad.library.domain.BookSearchCriteria
+import com.codesquad.library.domain.exceptions.model.NoBookExistsException
 import com.codesquad.library.domain.repositories.BookRepository
 import com.codesquad.library.dtos.model.book.BookDocument
 import com.codesquad.library.dtos.model.book.BookQueryDocument
@@ -28,9 +29,11 @@ open class BookSearchService constructor(private val bookRepository: BookReposit
         return books.map { b -> b.generateDocument() }
     }
 
+    open fun searchById(id: Long) : BookDocument {
+        return bookRepository.findById(id).map { b -> b.generateDocument() }.orElseThrow { NoBookExistsException("ID로 검색된 책이 없습니다.") }
+    }
+
     open fun generateSearchInfo() : SearchInfoDocument {
         return SearchInfoDocument(this.bookRepository.count(), BookSearchCriteria.values().asList())
     }
-
-
 }

@@ -96,4 +96,8 @@ public class BookService {
         return Streams.stream(bookRepository.findAll()).map(b -> b.generateDocument()).collect(Collectors.toList());
     }
 
+    public BookDocument searchBookById(Long id) {
+        return bookRepository.findById(id).map(b -> b.generateDocument()).orElseThrow(() -> new NoBookExistsException("해당 ID로 조회된 책이 없습니다."));
+    }
+
 }

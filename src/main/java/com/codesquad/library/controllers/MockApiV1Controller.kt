@@ -20,4 +20,9 @@ class MockApiV1Controller constructor(private val bookService: BookService, priv
     fun getSearchInfo() : SearchInfoDocument {
         return bookSearchService.getSearchInfo()
     }
+
+    @GetMapping("/books/{id}")
+    fun getBookInfo(@PathVariable id: Long) : BookDocument {
+        return bookService.searchBookById(id)
+    }
 }
