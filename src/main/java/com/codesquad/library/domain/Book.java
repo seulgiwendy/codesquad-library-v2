@@ -54,6 +54,10 @@ public class Book {
     @JoinColumn(name = "FEATURED_ID")
     private Featured featured;
 
+    @ManyToMany
+    @JoinTable(name = "BOOK_TAGS", joinColumns = @JoinColumn(name = "BOOK_ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID"))
+    private List<Tag> tags;
+
     private boolean isPossessed;
 
     @Column(name = "SERIES_CODE")
