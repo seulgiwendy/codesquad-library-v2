@@ -3,6 +3,7 @@ package com.codesquad.library.domain.service;
 import com.codesquad.library.domain.Author;
 import com.codesquad.library.domain.Book;
 import com.codesquad.library.domain.BookCategories;
+import com.codesquad.library.domain.assembler.BookAssembler;
 import com.codesquad.library.domain.authentication.Member;
 import com.codesquad.library.domain.exceptions.model.NoBookExistsException;
 import com.codesquad.library.domain.repositories.AuthorRepository;
@@ -28,6 +29,9 @@ public class BookService {
 
     @Autowired
     private AuthorRepository authorRepository;
+
+    @Autowired
+    private BookAssembler bookAssembler;
 
     public List<BookDocument> getAllBooks() {
         List<BookDocument> books = Lists.newArrayList();

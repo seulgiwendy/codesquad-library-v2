@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) wheejuni tech 2018.
+ *
+ * Proudly developed by Hwi Jun Jeong,
+ * Inspired by Bomee, the smartest puppy of the Galaxy.
+ *
+ * me@wheejuni.com
+ * https://github.com/seulgiwendy
+ */
+
 package com.codesquad.library.domain
 
 import javax.persistence.*
@@ -13,5 +23,5 @@ data class Tag(
 
         val name: String? = null,
 
-        @ManyToMany(mappedBy = "tags")
-        var books: MutableList<Book>? = null)
+        @OneToMany(mappedBy = "tag", cascade = [CascadeType.ALL])
+        var tagsets: MutableList<TagSet>)

@@ -1,3 +1,13 @@
+/*
+ * Copyright (c) wheejuni tech 2018.
+ *
+ * Proudly developed by Hwi Jun Jeong,
+ * Inspired by Bomee, the smartest puppy of the Galaxy.
+ *
+ * me@wheejuni.com
+ * https://github.com/seulgiwendy
+ */
+
 package com.codesquad.library.domain;
 
 import com.codesquad.library.domain.authentication.Member;
@@ -54,9 +64,8 @@ public class Book {
     @JoinColumn(name = "FEATURED_ID")
     private Featured featured;
 
-    @ManyToMany
-    @JoinTable(name = "BOOK_TAGS", joinColumns = @JoinColumn(name = "BOOK_ID"), inverseJoinColumns = @JoinColumn(name = "TAG_ID"))
-    private List<Tag> tags;
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TagSet> tagsets = Lists.newArrayList();
 
     private boolean isPossessed;
 
@@ -113,12 +122,15 @@ public class Book {
         this.reviews.add(review);
         review.setBook(this);
     }
-    //TODO implement document-return logic.
 
     public BookDocument generateDocument() {
         List<ReviewDocument> reviews = this.reviews.stream().map(r -> r.generateDocument()).collect(Collectors.toList());
 
-        return new BookDocument("book", this.id, this.title, this.description, this.imageHref, reviews, this.author, this.isPossessed, this.seriesNumber, BookStatus.generateStatus(this), this.bookCategories, this.bookLocations);
+        return new BookDocument("book", this.id, this.title, this.description, this.imageHref, reviews, this.author, this.isPossessed, this.seriesNumber, calculateAvgReviewScore(), BookStatus.generateStatus(this), this.bookCategories, this.bookLocations);
+    }
+
+    public double calculateAvgReviewScore() {
+        return this.reviews.stream().mapToDouble(r -> r.getScore()).average().getAsDouble();
     }
 
     public Book getObjectByDocument(NewBookDocument document) {

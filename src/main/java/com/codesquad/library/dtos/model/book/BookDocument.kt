@@ -16,6 +16,7 @@ data class BookDocument(
         val author: Author,
         val possessed: Boolean,
         val seriesNumber: Int,
+        val averageRating: Double,
         val status: List<BookStatus>? = null,
         val category: BookCategories? = null,
         val location: BookLocations? = null
