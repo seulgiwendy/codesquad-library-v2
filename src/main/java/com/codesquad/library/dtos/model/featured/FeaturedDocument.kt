@@ -17,9 +17,6 @@ data class FeaturedDocument(
         val title: String? = "",
         val content: String? = "",
 
-        @field:JsonProperty("featuredPageLink")
-        val link: String? = "",
-
         @field:JsonProperty("featuredBooks")
-        val Books: List<BookDocument>
+        val books: List<BookDocument>
 )
