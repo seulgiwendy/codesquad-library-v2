@@ -13,8 +13,8 @@ data class TagSet(
 
         @ManyToOne(cascade = [CascadeType.MERGE])
         @JoinColumn(name = "BOOK_ID")
-        var book: Book,
+        var book: Book? = null,
 
         @ManyToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "TAG_ID")
-        var tag: Tag)
+        var tag: Tag? = null)

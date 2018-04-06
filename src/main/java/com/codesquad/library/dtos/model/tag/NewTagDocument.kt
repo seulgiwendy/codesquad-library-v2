@@ -15,10 +15,10 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 data class NewTagDocument(
         @field:JsonProperty("tagTitle")
-        val title: String,
+        val title: String = "",
 
         @field:JsonProperty("bookId")
-        val id: Long) {
+        val id: Long = 0) {
 
     fun generateTag() : Tag {
         return Tag(name = this.title)

@@ -139,7 +139,7 @@ public class Book {
 
         return new BookDocument("book", this.id, this.title, this.description, this.imageHref, reviews, this.author, this.isPossessed, this.seriesNumber, calculateAvgReviewScore(), BookStatus.generateStatus(this), this.bookCategories, this.bookLocations,
                 FeaturedLinkDocument.Companion.generateDocument(this.featured),
-                this.tagsets.stream().map(t -> TagsetDocument.Companion.writeDocument(t)).collect(Collectors.toList()));
+                this.tagsets.stream().map(TagsetDocument.Companion::writeDocument).collect(Collectors.toList()));
     }
 
     public double calculateAvgReviewScore() {

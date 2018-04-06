@@ -22,7 +22,7 @@ data class TagsetDocument(
 
     companion object {
         fun writeDocument(tagSet: TagSet) : TagsetDocument {
-            return TagsetDocument(title = tagSet.tag.name!!, id = tagSet.id)
+            return TagsetDocument(title = tagSet.tag!!.name!!, id = tagSet.id)
         }
     }
 }

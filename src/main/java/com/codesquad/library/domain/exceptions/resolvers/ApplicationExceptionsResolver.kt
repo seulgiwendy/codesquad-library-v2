@@ -22,6 +22,7 @@ class ApplicationExceptionsResolver: HandlerExceptionResolver {
         if (e is ApplicationException) {
             var appException: ApplicationException = e
             logger.debug("Base Security Exception Caught!")
+            logger.debug(e.message)
 
             var document: ExceptionsDocument = appException.generateDocument()
             sendResponse(res, document)
