@@ -4,6 +4,7 @@ import com.codesquad.library.domain.Article;
 import com.codesquad.library.domain.authentication.Member;
 import com.codesquad.library.domain.repositories.ArticleRepository;
 import com.codesquad.library.domain.repositories.MemberRepository;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -22,6 +23,9 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableConfigurationProperties
 @ComponentScan
 public class LibraryApplication {
+
+	@Value("${admin.email}")
+    private String adminEmail;
 
 	public static final String APPLICATION_LOCATIONS = "spring.config.location="
 			+ "classpath:application.yml,"
@@ -45,7 +49,7 @@ public class LibraryApplication {
 
 	        Member member = Member.builder()
                     .name("정휘준")
-                    .loginEmail("shit@fuck.com")
+                    .loginEmail(this.adminEmail)
                     .password(password)
                     .roles(Member.MemberRoles.USER)
                     .build();

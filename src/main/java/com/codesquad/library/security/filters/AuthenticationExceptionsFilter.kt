@@ -18,9 +18,10 @@ class AuthenticationExceptionsFilter: OncePerRequestFilter() {
 
     override fun doFilterInternal(req: HttpServletRequest, res: HttpServletResponse, filter: FilterChain) {
         try {
-            log.debug("Authentication Attempt!")
+
             filter.doFilter(req, res)
         } catch (e: BaseSecurityException) {
+            log.debug("Authentication Attempt!")
             var doc: ExceptionsDocument = e.generateDocument()
 
             res.status = doc.httpStatus.value()

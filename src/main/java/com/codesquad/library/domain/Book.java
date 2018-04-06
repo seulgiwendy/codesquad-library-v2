@@ -1,10 +1,23 @@
+/*
+ * Copyright (c) wheejuni tech 2018.
+ *
+ * Proudly developed by Hwi Jun Jeong,
+ * Inspired by Bomee, the smartest puppy of the Galaxy.
+ *
+ * me@wheejuni.com
+ * https://github.com/seulgiwendy
+ */
+
 package com.codesquad.library.domain;
 
 import com.codesquad.library.domain.authentication.Member;
 import com.codesquad.library.domain.constraints.LongerThan;
 import com.codesquad.library.dtos.model.book.BookDocument;
 import com.codesquad.library.dtos.model.book.NewBookDocument;
+import com.codesquad.library.dtos.model.featured.FeaturedLinkDocument;
 import com.codesquad.library.dtos.model.review.ReviewDocument;
+import com.codesquad.library.dtos.model.tag.NewTagDocument;
+import com.codesquad.library.dtos.model.tag.TagsetDocument;
 import com.google.common.base.Objects;
 import com.google.common.collect.Lists;
 import lombok.*;
@@ -36,6 +49,9 @@ public class Book {
     @Column(name = "BOOK_DESCRIPTION", columnDefinition = "TEXT")
     private String description;
 
+    @Column(name= "IMAGE_URL", columnDefinition = "VARCHAR(100) NULL")
+    private String imageHref;
+
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = Lists.newArrayList();
 
@@ -50,6 +66,9 @@ public class Book {
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "FEATURED_ID")
     private Featured featured;
+
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<TagSet> tagsets = Lists.newArrayList();
 
     private boolean isPossessed;
 
@@ -106,10 +125,25 @@ public class Book {
         this.reviews.add(review);
         review.setBook(this);
     }
-    //TODO implement document-return logic.
+
+    public void addTagSet(TagSet set) {
+        if (this.tagsets == null) {
+            this.tagsets = Lists.newArrayList();
+        }
+
+        this.tagsets.add(set);
+    }
 
     public BookDocument generateDocument() {
-        return new BookDocument("book", this.id, this.title, this.description, null, this.author, this.isPossessed, this.seriesNumber, BookStatus.generateStatus(this), this.bookCategories, this.bookLocations);
+        List<ReviewDocument> reviews = this.reviews.stream().map(r -> r.generateDocument()).collect(Collectors.toList());
+
+        return new BookDocument("book", this.id, this.title, this.description, this.imageHref, reviews, this.author, this.isPossessed, this.seriesNumber, calculateAvgReviewScore(), BookStatus.generateStatus(this), this.bookCategories, this.bookLocations,
+                FeaturedLinkDocument.Companion.generateDocument(this.featured),
+                this.tagsets.stream().map(TagsetDocument.Companion::writeDocument).collect(Collectors.toList()));
+    }
+
+    public double calculateAvgReviewScore() {
+        return this.reviews.stream().mapToDouble(r -> r.getScore()).average().orElse(0.0);
     }
 
     public Book getObjectByDocument(NewBookDocument document) {

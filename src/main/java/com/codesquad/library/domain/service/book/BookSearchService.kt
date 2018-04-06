@@ -1,14 +1,23 @@
-package com.codesquad.library.domain.service
+/*
+ * Copyright (c) wheejuni tech 2018.
+ *
+ * Proudly developed by Hwi Jun Jeong,
+ * Inspired by Bomee, the smartest puppy of the Galaxy.
+ *
+ * me@wheejuni.com
+ * https://github.com/seulgiwendy
+ */
 
-import com.codesquad.library.domain.Book
+package com.codesquad.library.domain.service.book
+
 import com.codesquad.library.domain.BookSearchCriteria
+import com.codesquad.library.domain.exceptions.model.NoBookExistsException
 import com.codesquad.library.domain.repositories.BookRepository
 import com.codesquad.library.dtos.model.book.BookDocument
 import com.codesquad.library.dtos.model.book.BookQueryDocument
 import com.codesquad.library.dtos.model.book.SearchInfoDocument
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 
@@ -28,9 +37,11 @@ open class BookSearchService constructor(private val bookRepository: BookReposit
         return books.map { b -> b.generateDocument() }
     }
 
+    open fun searchById(id: Long) : BookDocument {
+        return bookRepository.findById(id).map { b -> b.generateDocument() }.orElseThrow { NoBookExistsException("ID로 검색된 책이 없습니다.") }
+    }
+
     open fun generateSearchInfo() : SearchInfoDocument {
         return SearchInfoDocument(this.bookRepository.count(), BookSearchCriteria.values().asList())
     }
-
-
 }

@@ -1,6 +1,17 @@
+/*
+ * Copyright (c) wheejuni tech 2018.
+ *
+ * Proudly developed by Hwi Jun Jeong,
+ * Inspired by Bomee, the smartest puppy of the Galaxy.
+ *
+ * me@wheejuni.com
+ * https://github.com/seulgiwendy
+ */
+
 package com.codesquad.library.domain;
 
 import com.codesquad.library.domain.authentication.Member;
+import com.codesquad.library.domain.constraints.ReviewScore;
 import com.codesquad.library.dtos.model.review.ReviewDocument;
 import com.google.common.base.Objects;
 import lombok.*;
@@ -41,8 +52,12 @@ public class Review {
     @Column(name = "REVIEW_CONTENT", columnDefinition = "TEXT NULL")
     private String content;
 
+    @ReviewScore
+    @Column(name = "REVIEW_SCORE")
+    private float score;
+
     public ReviewDocument generateDocument() {
-        return new ReviewDocument(this.title, this.content);
+        return new ReviewDocument(this.title, this.content, this.score);
     }
 
     @Override

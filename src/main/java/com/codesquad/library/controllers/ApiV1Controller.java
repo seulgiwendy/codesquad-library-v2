@@ -2,8 +2,7 @@ package com.codesquad.library.controllers;
 
 import com.codesquad.library.domain.Book;
 import com.codesquad.library.domain.authentication.Member;
-import com.codesquad.library.domain.repositories.FeaturedRepository;
-import com.codesquad.library.domain.service.BookService;
+import com.codesquad.library.domain.service.book.BookService;
 import com.codesquad.library.domain.service.IsbnBookSearchService;
 import com.codesquad.library.dtos.model.book.BookQueryDocument;
 import com.codesquad.library.dtos.model.book.BookSearchDocument;

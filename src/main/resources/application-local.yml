@@ -39,3 +39,6 @@ naver:
     endpoint: openapi.naver.com
     accessKey: A7t6chcO6XlnFYtoXRl2
     secretKey: X7rQRT7vgZ
+
+admin:
+  email: me@wheejuni.com

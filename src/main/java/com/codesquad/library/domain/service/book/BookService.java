@@ -1,8 +1,19 @@
-package com.codesquad.library.domain.service;
+/*
+ * Copyright (c) wheejuni tech 2018.
+ *
+ * Proudly developed by Hwi Jun Jeong,
+ * Inspired by Bomee, the smartest puppy of the Galaxy.
+ *
+ * me@wheejuni.com
+ * https://github.com/seulgiwendy
+ */
+
+package com.codesquad.library.domain.service.book;
 
 import com.codesquad.library.domain.Author;
 import com.codesquad.library.domain.Book;
 import com.codesquad.library.domain.BookCategories;
+import com.codesquad.library.domain.assembler.BookAssembler;
 import com.codesquad.library.domain.authentication.Member;
 import com.codesquad.library.domain.exceptions.model.NoBookExistsException;
 import com.codesquad.library.domain.repositories.AuthorRepository;
@@ -28,6 +39,9 @@ public class BookService {
 
     @Autowired
     private AuthorRepository authorRepository;
+
+    @Autowired
+    private BookAssembler bookAssembler;
 
     public List<BookDocument> getAllBooks() {
         List<BookDocument> books = Lists.newArrayList();
@@ -94,6 +108,10 @@ public class BookService {
 
     public List<BookDocument> searchBookByQuery() {
         return Streams.stream(bookRepository.findAll()).map(b -> b.generateDocument()).collect(Collectors.toList());
+    }
+
+    public BookDocument searchBookById(Long id) {
+        return bookRepository.findById(id).map(b -> b.generateDocument()).orElseThrow(() -> new NoBookExistsException("해당 ID로 조회된 책이 없습니다."));
     }
 
 }
