@@ -19,9 +19,9 @@ data class Tag(
         @Id
         @GeneratedValue(strategy = GenerationType.AUTO)
         @Column(name = "TAG_ID")
-        val id: Long? = null,
+        val id: Long? = 0,
 
         val name: String? = null,
 
         @OneToMany(mappedBy = "tag", cascade = [CascadeType.ALL])
-        var tagsets: MutableList<TagSet>)
+        var tagsets: MutableList<TagSet>? = null)

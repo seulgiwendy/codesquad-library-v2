@@ -4,7 +4,9 @@ import com.codesquad.library.domain.Author
 import com.codesquad.library.domain.BookCategories
 import com.codesquad.library.domain.BookLocations
 import com.codesquad.library.domain.BookStatus
+import com.codesquad.library.dtos.model.featured.FeaturedLinkDocument
 import com.codesquad.library.dtos.model.review.ReviewDocument
+import com.codesquad.library.dtos.model.tag.TagsetDocument
 
 data class BookDocument(
         val type: String = "book",
@@ -19,5 +21,7 @@ data class BookDocument(
         val averageRating: Double,
         val status: List<BookStatus>? = null,
         val category: BookCategories? = null,
-        val location: BookLocations? = null
+        val location: BookLocations? = null,
+        val featured: FeaturedLinkDocument? = null,
+        val tags: List<TagsetDocument>? = null
 )

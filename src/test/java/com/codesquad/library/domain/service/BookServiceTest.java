@@ -5,6 +5,7 @@ import com.codesquad.library.domain.Book;
 import com.codesquad.library.domain.authentication.Member;
 import com.codesquad.library.domain.repositories.BookRepository;
 import com.codesquad.library.domain.repositories.MemberRepository;
+import com.codesquad.library.domain.service.book.BookService;
 import com.codesquad.library.dtos.model.book.NewBookDocument;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.After;

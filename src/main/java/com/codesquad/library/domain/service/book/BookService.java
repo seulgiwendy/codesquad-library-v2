@@ -1,4 +1,14 @@
-package com.codesquad.library.domain.service;
+/*
+ * Copyright (c) wheejuni tech 2018.
+ *
+ * Proudly developed by Hwi Jun Jeong,
+ * Inspired by Bomee, the smartest puppy of the Galaxy.
+ *
+ * me@wheejuni.com
+ * https://github.com/seulgiwendy
+ */
+
+package com.codesquad.library.domain.service.book;
 
 import com.codesquad.library.domain.Author;
 import com.codesquad.library.domain.Book;

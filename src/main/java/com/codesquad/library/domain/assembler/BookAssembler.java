@@ -16,7 +16,9 @@ import com.codesquad.library.domain.BookStatus;
 import com.codesquad.library.domain.Review;
 import com.codesquad.library.dtos.model.book.BookDocument;
 import com.codesquad.library.dtos.model.book.NewBookDocument;
+import com.codesquad.library.dtos.model.featured.FeaturedLinkDocument;
 import com.codesquad.library.dtos.model.review.ReviewDocument;
+import com.codesquad.library.dtos.model.tag.TagsetDocument;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -44,7 +46,9 @@ public class BookAssembler {
                 calculateAverageRatings(reviews),
                 statuses,
                 book.getBookCategories(),
-                book.getBookLocations());
+                book.getBookLocations(),
+                FeaturedLinkDocument.Companion.generateDocument(book.getFeatured()),
+                book.getTagsets().stream().map(t -> TagsetDocument.Companion.writeDocument(t)).collect(Collectors.toList()));
     }
 
     public Book generateObject(NewBookDocument document) {

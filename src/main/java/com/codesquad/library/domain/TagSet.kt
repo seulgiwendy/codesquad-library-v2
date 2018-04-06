@@ -11,10 +11,10 @@ data class TagSet(
         @Column(name = "TAGSET_ID")
         val id: Long = 0,
 
-        @ManyToOne
+        @ManyToOne(cascade = [CascadeType.MERGE])
         @JoinColumn(name = "BOOK_ID")
         var book: Book,
 
-        @ManyToOne
+        @ManyToOne(cascade = [CascadeType.ALL])
         @JoinColumn(name = "TAG_ID")
         var tag: Tag)
